@@ -1,13 +1,13 @@
+# FROM pytorch/pytorch:1.10.0-cuda11.3-cudnn8-devel
+FROM nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
-ARG IMG_TAG=1.8.1-cuda10.2-cudnn7-devel
-ARG IMG_REPO=pytorch
+RUN apt -y update && apt -y install git vim less python3-pip
+RUN pip3 install torch==1.8.2 torchvision==0.9.2 torchaudio==0.8.2 --extra-index-url https://download.pytorch.org/whl/lts/1.8/cu111
+RUN pip3 install axial_positional_embedding einops>=0.3.2 ftfy packaging pillow regex rotary-embedding-torch taming-transformers-rom1504 tokenizers torch>=1.6 torchvision transformers tqdm youtokentome WebDataset
 
-FROM pytorch/$IMG_REPO:$IMG_TAG
+RUN pip3 install git+https://github.com/openai/DALL-E.git
+# RUN pip3 install git+https://github.com/openai/CLIP.git
 
-RUN apt-get -y update && apt-get -y install git gcc llvm-9-dev cmake libaio-dev vim wget
+# RUN pip3 install beautifulsoup4
 
-RUN git clone https://github.com/microsoft/DeepSpeed.git /tmp/DeepSpeed
-RUN cd /tmp/DeepSpeed && DS_BUILD_OPS=1 ./install.sh -r
-RUN pip install git+https://github.com/lucidrains/DALLE-pytorch.git
-
-WORKDIR dalle
+WORKDIR /work

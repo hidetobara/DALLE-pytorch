@@ -8,6 +8,6 @@ RUN pip3 install axial_positional_embedding einops>=0.3.2 ftfy packaging pillow 
 RUN pip3 install git+https://github.com/openai/DALL-E.git
 # RUN pip3 install git+https://github.com/openai/CLIP.git
 
-# RUN pip3 install beautifulsoup4
+RUN pip3 install beautifulsoup4 wandb
 
 WORKDIR /work
